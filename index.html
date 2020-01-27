@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- This is based on DillingerLee's great template here:
+https://github.com/Team-Code/KA_Offline -->
+<html> 
+ <head>
+    <title>Processing.JS inside Webpages: Template</title> 
+</head>
+ <body>
+ <h1 align = "center"></h1>
+    <p align="center"> 
+      <canvas id="mycanvas"></canvas> 
+    </p>
+ </body>
+ 
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+ 
+ <script>
+    var sketchProc = function(processingInstance) {
+     with (processingInstance) {
+        size(600, 400); 
+        frameRate(60);
+      /**
+
+ FLAPPY CIRCLE by Julian (Seedname101)
+ 
+ Date: 1/26/2020
+ 
+ Description: Low resolution version of flappy bird
+ 
+ Special thanks to: Larry Serflaten
+ 
+ HIGH SCORES:
+ 1.[name] - [score]
+ 2.[name] - [score]
+ 3.[name] - [score]
+ 4.[name] - [score]
+ 5.[name] - [score]
+ 
+ To-Do List: 
+-Background
+**/
+
+var scene = 0;
+var physics = function(){
+this.mass = 15;
+this.position = new PVector(width/3, height-height+this.mass/2);
+this.velocity = new PVector(0, 0);
+this.acceleration = new PVector(0, 0);
+};
+physics.prototype.force = function(force) {
+    var f = PVector.div(force, this.mass);
+    this.acceleration.add(f);
+};
+physics.prototype.click = function(){
+this.velocity.set(0, -5);
+};
+physics.prototype.update = function() {
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+    this.acceleration.mult(0);
+};
+physics.prototype.display = function(){
+    fill(249, 166, 2);
+    strokeWeight(1);
+    ellipse(this.position.x, this.position.y, this.mass, this.mass);
+    
+};
+physics.prototype.edges = function(){
+    if (this.position.y > height-this.mass/2) {
+    scene = 2;
+    }
+    if (this.position.y <= height-height+this.mass/2) {
+        this.velocity.set(0, 2);
+        this.position.y = height-height+this.mass/2;
+    }
+};
+physics.prototype.reset = function(){
+this.mass = 15;
+this.position = new PVector(width/3, height-height+this.mass/2);
+this.velocity = new PVector(0, 0);
+this.acceleration = new PVector(0, 0);
+};
+var p = new physics();
+var sx = width;
+var sy = random(50, 200);
+var score = 0;
+
+var syh = 100;
+draw = function() {
+textAlign(CENTER, CENTER);
+if(scene === 0){
+    noStroke();
+    background(135, 206, 235);
+    fill(249, 166, 2);
+    textFont(createFont("impact"), 70);
+    text("FLAPPY\nCIRCLE", width/2, height/2-50);
+    textFont(createFont("comic sans ms"), 15);
+    fill(0, 0, 0);
+    text("-   Tap   to   Begin   -", width/2, height/2+70);
+        p.display();
+}
+    if(scene === 1){
+    background(135, 206, 235);
+    noStroke();
+    fill(133, 187, 101);
+    rect(sx, height-height, 60, 400);
+    fill(135, 206, 235);
+    rect(sx, sy, 80, syh);
+    fill(133, 187, 101);
+    rect(sx-10, sy+syh, 80, 50);
+    rect(sx-10, sy-50, 80, 50);
+    sx -= 3;
+    if (sx <= width-width-80){
+        score += 1;
+        sx = width;
+        sy = random(50, 200);
+        if(syh >= 66){
+        syh-=1;
+        }
+    }
+
+    var gravity = new PVector(0, 5);
+    p.force(gravity);
+    p.update();
+    p.display();
+    p.edges();
+            fill(0, 0, 0);
+    textFont(createFont("impact"), 70);
+    text(score, width/2, height/2-110);
+    if(p.position.y-p.mass/2 <= sy && sx-10 <= width/3 && sx >= width/3-80){
+       scene += 1;
+        scene = 2;
+    } else if(p.position.y+p.mass/2 >= sy+syh && sx-10 <= width/3 && sx-10 >= width/3-80){
+         scene += 1;
+         scene = 2;
+    }
+    if(scene >= 2){
+    background(135, 206, 235);
+    fill(255, 0, 0);
+    textFont(createFont("impact"), 70);
+    text("YOU DIED!", width/2, height/2-70);
+    textFont(createFont("impact"), 40);
+    fill(0, 0, 0);
+    text("Score: " + score, width/2, height/2);
+    fill(255, 255, 255);
+    rect(width/2-150/2, height/2-50/2+75, 150, 50);
+    textFont(createFont("comic sans ms"), 30);
+    fill(0, 0, 0);
+    text("Try Again", width/2, height/2+75);
+    }
+    }
+
+};
+mouseClicked = function(){
+    if(scene === 0){
+        scene += 1;
+    }
+    if(scene === 1){
+    p.click();
+    }
+if(scene === 2 && mouseX >= width/2-150/2 && mouseX <= width/2-150/2+150 && mouseY >= height/2-50/2+75 && mouseY <= height/2-50/2+75+50){
+    p.reset();
+    scene = 0;
+    score = 0;
+    sx = width;
+    syh = 100;
+}
+};
+
+        
+    }};
+
+    // Get the canvas that Processing-js will use
+    var canvas = document.getElementById("mycanvas"); 
+    // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
+    var processingInstance = new Processing(canvas, sketchProc); 
+ </script>
+
+</html>
