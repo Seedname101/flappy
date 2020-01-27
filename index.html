@@ -17,8 +17,7 @@
      with (processingInstance) {
         size(600, 400); 
         frameRate(60);
-      /**
-
+/**
  FLAPPY CIRCLE by Julian (Seedname101)
  
  Date: 1/26/2020
@@ -37,11 +36,11 @@
  To-Do List: 
 -Background
 **/
-
+var timer = 0;
 var scene = 0;
 var physics = function(){
 this.mass = 15;
-this.position = new PVector(width/3, height-height+this.mass/2);
+this.position = new PVector(width/3, height-height-this.mass/2);
 this.velocity = new PVector(0, 0);
 this.acceleration = new PVector(0, 0);
 };
@@ -61,16 +60,25 @@ physics.prototype.display = function(){
     fill(249, 166, 2);
     strokeWeight(1);
     ellipse(this.position.x, this.position.y, this.mass, this.mass);
-    
 };
 physics.prototype.edges = function(){
-    if (this.position.y > height-this.mass/2) {
+    if (this.position.y > height-this.mass/2 && scene === 1) {
     scene = 2;
+    }
+        if (this.position.y > height-this.mass/2 && scene === 0) {
+     this.velocity.set(0, 0.2);
+     this.position.y = height-this.mass/2;
     }
     if (this.position.y <= height-height+this.mass/2) {
         this.velocity.set(0, 2);
         this.position.y = height-height+this.mass/2;
     }
+};
+physics.prototype.idle = function(){
+if(timer >= 3){
+    this.velocity.set(0, -5.15);
+    timer = 0;
+}
 };
 physics.prototype.reset = function(){
 this.mass = 15;
@@ -78,24 +86,32 @@ this.position = new PVector(width/3, height-height+this.mass/2);
 this.velocity = new PVector(0, 0);
 this.acceleration = new PVector(0, 0);
 };
+
 var p = new physics();
 var sx = width;
 var sy = random(50, 200);
 var score = 0;
-
 var syh = 100;
 draw = function() {
 textAlign(CENTER, CENTER);
 if(scene === 0){
-    noStroke();
+    timer+=0.1;
     background(135, 206, 235);
+    var gravity = new PVector(0, 5);
+    p.force(gravity);
+    p.update();
+    p.display();
+    p.edges();
+    p.idle();
+    
+    noStroke();
     fill(249, 166, 2);
     textFont(createFont("impact"), 70);
-    text("FLAPPY\nCIRCLE", width/2, height/2-50);
+    text(" FLAPPY\n         CIRCLE", width/2, height/2-50);
     textFont(createFont("comic sans ms"), 15);
     fill(0, 0, 0);
     text("-   Tap   to   Begin   -", width/2, height/2+70);
-        p.display();
+
 }
     if(scene === 1){
     background(135, 206, 235);
