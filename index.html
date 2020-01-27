@@ -27,7 +27,7 @@
  Special thanks to: Larry Serflaten
  
  HIGH SCORES:
- 1.[name] - [score]
+ 1. Julian - 31
  2.[name] - [score]
  3.[name] - [score]
  4.[name] - [score]
@@ -121,7 +121,7 @@ if(scene === 0){
     rect(sx, height-height, 60, 400);
     fill(135, 206, 235);
     rect(sx, sy, 80, syh);
-    fill(133, 187, 101);
+    fill(34,139,34);
     rect(sx-10, sy+syh, 80, 50);
     rect(sx-10, sy-50, 80, 50);
     sx -= 3;
@@ -165,7 +165,6 @@ if(scene === 0){
     text("Try Again", width/2, height/2+75);
     }
     }
-
 };
 mouseClicked = function(){
     if(scene === 0){
@@ -182,6 +181,24 @@ if(scene === 2 && mouseX >= width/2-150/2 && mouseX <= width/2-150/2+150 && mous
     syh = 100;
 }
 };
+keyPressed = function(){
+if(keyCode === 32){
+        if(scene === 0){
+        scene += 1;
+    }
+    if(scene === 1){
+    p.click();
+    }
+    if(scene === 2){
+    p.reset();
+    scene = 0;
+    score = 0;
+    sx = width;
+    syh = 100;
+}
+}  
+};
+
         
     }};
 
