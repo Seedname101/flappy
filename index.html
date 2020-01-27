@@ -114,6 +114,7 @@ if(scene === 0){
 
 }
     if(scene === 1){
+    timer = 0;
     background(135, 206, 235);
     noStroke();
     fill(133, 187, 101);
@@ -149,6 +150,7 @@ if(scene === 0){
          scene = 2;
     }
     if(scene >= 2){
+        timer = 0;
     background(135, 206, 235);
     fill(255, 0, 0);
     textFont(createFont("impact"), 70);
@@ -180,7 +182,6 @@ if(scene === 2 && mouseX >= width/2-150/2 && mouseX <= width/2-150/2+150 && mous
     syh = 100;
 }
 };
-
         
     }};
 
