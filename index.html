@@ -36,6 +36,7 @@
  To-Do List: 
 -Background
 **/
+frameRate(60);
 var timer = 0;
 var scene = 0;
 var physics = function(){
@@ -88,6 +89,7 @@ this.acceleration = new PVector(0, 0);
 };
 
 var p = new physics();
+var pauseh = 0;
 var sx = width;
 var sy = random(50, 200);
 var score = 0;
@@ -110,7 +112,7 @@ if(scene === 0){
     text(" FLAPPY\n         CIRCLE", width/2, height/2-50);
     textFont(createFont("comic sans ms"), 15);
     fill(0, 0, 0);
-    text("-   Tap   to   Begin   -", width/2, height/2+70);
+    text("\n-   Tap or Press 'UP' Arrow Key to Begin   -\n|   Press the spcace bar to Pause   |", width/2, height/2+70);
 
 }
     if(scene === 1){
@@ -126,13 +128,16 @@ if(scene === 0){
     rect(sx-10, sy-50, 80, 50);
     sx -= 3;
     if (sx <= width-width-80){
-        score += 1;
         sx = width;
         sy = random(50, 200);
         if(syh >= 66){
         syh-=1;
         }
     }
+if(sx <= width/3-80 && sx >= width/3-80){
+    score += 1;
+    
+}
 
     var gravity = new PVector(0, 5);
     p.force(gravity);
@@ -148,8 +153,8 @@ if(scene === 0){
     } else if(p.position.y+p.mass/2 >= sy+syh && sx-10 <= width/3 && sx-10 >= width/3-80){
          scene += 1;
          scene = 2;
-    }
-    if(scene >= 2){
+    }}
+    if(scene === 2){
         timer = 0;
     background(135, 206, 235);
     fill(255, 0, 0);
@@ -164,7 +169,18 @@ if(scene === 0){
     fill(0, 0, 0);
     text("Try Again", width/2, height/2+75);
     }
-    }
+if(scene === 3){
+    fill(255, 255, 255);
+    rect(width/2-105/2+5, height/2-100/2, 35, 100);
+    rect(width/2-35/2+35-5, height/2-100/2, 35, 100);
+}
+if(pauseh === 1 && scene === 1){
+    scene = 3;
+}
+if(pauseh === 0 && scene === 3){
+    scene = 1;
+}
+
 };
 mouseClicked = function(){
     if(scene === 0){
@@ -180,9 +196,12 @@ if(scene === 2 && mouseX >= width/2-150/2 && mouseX <= width/2-150/2+150 && mous
     sx = width;
     syh = 100;
 }
+    if(scene === 3 && pauseh === 1){
+        pauseh = 0;
+    }
 };
 keyPressed = function(){
-if(keyCode === 32){
+if(keyCode === UP){
         if(scene === 0){
         scene += 1;
     }
@@ -196,8 +215,20 @@ if(keyCode === 32){
     sx = width;
     syh = 100;
 }
+    if(scene === 3 && pauseh === 1){
+        pauseh = 0;
+    }
 }  
+if(keyCode === 32){
+    if(scene === 1 && pauseh === 0){
+        pauseh += 1;
+    }
+    if(scene === 3 && pauseh === 1){
+        pauseh = 0;
+    }
+}
 };
+
 
         
     }};
