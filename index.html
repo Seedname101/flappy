@@ -65,7 +65,7 @@ physics.prototype.update = function() {
     this.acceleration.mult(0);
 };
 physics.prototype.display = function(){
-    image(b, this.position.x, this.positon.y, this.mass, this.mass);
+    image(b, this.position.x, this.positon.y);
 };
 physics.prototype.edges = function(){
     if (this.position.y > height-this.mass/2 && scene === 1) {
