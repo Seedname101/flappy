@@ -17,8 +17,8 @@
      with (processingInstance) {
         size(600, 400);
         frameRate(60);
-      var audio = new Audio('<a href="https://seedname101.github.io/flappy'" target="_blank" rel="nofollow">https://seedname101.github.io/flappy/'</a>);
-audio.play();
+      var audio = new Audio('<a href="https://seedname101.github.io/flappy/coin.wav'" target="_blank" rel="nofollow">https://seedname101.github.io/flappy/coin.wav'</a>);
+
 
 /**
  FLAPPY CIRCLE by Julian (Seedname101)
@@ -139,7 +139,7 @@ if(scene === 0){
     }
 if(sx <= width/3-80 && sx >= width/3-80){
     score += 1;
-    
+    audio.play();
 }
 
     var gravity = new PVector(0, 5);
