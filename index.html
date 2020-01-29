@@ -17,9 +17,13 @@
      with (processingInstance) {
         size(600, 400);
         frameRate(60);
+      PImage b;
       var point = new Audio("https://seedname101.github.io/flappy/sfx_point.wav");
       var death = new Audio("https://seedname101.github.io/flappy/sfx_die.wav");
       var flap = new Audio("https://seedname101.github.io/flappy/sfx_wing.wav");
+      b = loadImage("https://seedname101.github.io/flappy/flappy.jpg");
+
+    
 /**
  FLAPPY CIRCLE by Julian (Seedname101)
  
@@ -41,6 +45,7 @@
 **/
 var timer = 0;
 var scene = 0;
+      
 var physics = function(){
 this.mass = 15;
 this.position = new PVector(width/3, height-height-this.mass/2);
@@ -60,9 +65,7 @@ physics.prototype.update = function() {
     this.acceleration.mult(0);
 };
 physics.prototype.display = function(){
-    fill(249, 166, 2);
-    strokeWeight(1);
-    ellipse(this.position.x, this.position.y, this.mass, this.mass);
+    image(b, this.position.x, this.positon.y, this.mass, this.mass);
 };
 physics.prototype.edges = function(){
     if (this.position.y > height-this.mass/2 && scene === 1) {
