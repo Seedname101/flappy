@@ -17,9 +17,9 @@
      with (processingInstance) {
         size(600, 400);
         frameRate(60);
-      var audio = new Audio("https://seedname101.github.io/flappy/coin.wav");
-
-
+      var point = new Audio("https://seedname101.github.io/flappy/sfx_point.wav");
+      var death = new Audio("https://seedname101.github.io/flappy/sfx_die.wav");
+      var flap = new Audio("https://seedname101.github.io/flappy/sfx_wing.wav");
 /**
  FLAPPY CIRCLE by Julian (Seedname101)
  
@@ -67,6 +67,7 @@ physics.prototype.display = function(){
 physics.prototype.edges = function(){
     if (this.position.y > height-this.mass/2 && scene === 1) {
     scene = 2;
+     death.play();
     }
         if (this.position.y > height-this.mass/2 && scene === 0) {
      this.velocity.set(0, 0.2);
@@ -132,13 +133,13 @@ if(scene === 0){
     if (sx <= width-width-80){
         sx = width;
         sy = random(50, 200);
-        if(syh >= 66){
-        syh-=1;
+        if(syh >= 65){
+        syh = 65;
         }
     }
 if(sx <= width/3-80 && sx >= width/3-80){
     score += 1;
-    audio.play();
+    point.play();
 }
 
     var gravity = new PVector(0, 5);
@@ -152,9 +153,11 @@ if(sx <= width/3-80 && sx >= width/3-80){
     if(p.position.y-p.mass/2 <= sy && sx-10 <= width/3 && sx >= width/3-80){
        scene += 1;
         scene = 2;
+     death.play();
     } else if(p.position.y+p.mass/2 >= sy+syh && sx-10 <= width/3 && sx-10 >= width/3-80){
          scene += 1;
          scene = 2;
+     death.play();
     }}
     if(scene === 2){
         timer = 0;
@@ -187,9 +190,11 @@ if(pauseh === 0 && scene === 3){
 mouseClicked = function(){
     if(scene === 0){
         scene += 1;
+     flap.play();
     }
     if(scene === 1){
     p.click();
+    flap.play();
     }
 if(scene === 2 && mouseX >= width/2-150/2 && mouseX <= width/2-150/2+150 && mouseY >= height/2-50/2+75 && mouseY <= height/2-50/2+75+50){
     p.reset();
@@ -206,8 +211,10 @@ keyPressed = function(){
 if(keyCode === UP){
         if(scene === 0){
         scene += 1;
+         flap.play();
     }
     if(scene === 1){
+    flap.play();
     p.click();
     }
     if(scene === 2){
