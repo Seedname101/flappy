@@ -20,7 +20,7 @@
       var point = new Audio("https://seedname101.github.io/flappy/sfx_point.wav");
       var death = new Audio("https://seedname101.github.io/flappy/sfx_die.wav");
       var flap = new Audio("https://seedname101.github.io/flappy/sfx_wing.wav");
-
+      var pause = new Audio("https://seedname101.github.io/flappy/pause.wav");
     
 /**
  FLAPPY CIRCLE by Julian (Seedname101)
@@ -229,14 +229,17 @@ if(keyCode === UP){
 }
     if(scene === 3 && pauseh === 1){
         pauseh = 0;
+       pause.play();
     }
 }  
 if(keyCode === 32){
     if(scene === 1 && pauseh === 0){
         pauseh += 1;
+     pause.play();
     }
     if(scene === 3 && pauseh === 1){
         pauseh = 0;
+     pause.play();
     }
 }
 };
