@@ -21,7 +21,7 @@
       var death = new Audio("https://seedname101.github.io/flappy/sfx_die.wav");
       var flap = new Audio("https://seedname101.github.io/flappy/sfx_wing.wav");
       var pause = new Audio("https://seedname101.github.io/flappy/pause.wav");
-    
+      var hiscore = [];
 /**
  FLAPPY CIRCLE by Julian (Seedname101)
  
@@ -70,6 +70,7 @@ physics.prototype.display = function(){
 physics.prototype.edges = function(){
     if (this.position.y > height-this.mass/2 && scene === 1) {
     scene = 2;
+     hiscore.push([score]);  
      death.play();
     }
         if (this.position.y > height-this.mass/2 && scene === 0) {
@@ -156,10 +157,12 @@ if(sx <= width/3-80 && sx >= width/3-80){
     if(p.position.y-p.mass/2 <= sy && sx-10 <= width/3 && sx >= width/3-80){
        scene += 1;
         scene = 2;
+     hiscore.push([score]);  
      death.play();
     } else if(p.position.y+p.mass/2 >= sy+syh && sx-10 <= width/3 && sx-10 >= width/3-80){
          scene += 1;
          scene = 2;
+     hiscore.push([score]);  
      death.play();
     }}
     if(scene === 2){
@@ -167,10 +170,11 @@ if(sx <= width/3-80 && sx >= width/3-80){
     background(135, 206, 235);
     fill(255, 0, 0);
     textFont(createFont("impact"), 70);
-    text("YOU DIED!", width/2, height/2-70);
+    text("YOU DIED!", width/2, height/2-125);
     textFont(createFont("impact"), 40);
     fill(0, 0, 0);
     text("Score: " + score, width/2, height/2);
+    text("High Score: " + Math.max.apply(null, hiscore), width/2, height/2-50);
     fill(255, 255, 255);
     rect(width/2-150/2, height/2-50/2+75, 150, 50);
     textFont(createFont("comic sans ms"), 30);
