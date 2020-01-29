@@ -17,11 +17,9 @@
      with (processingInstance) {
         size(600, 400);
         frameRate(60);
-      PImage b;
       var point = new Audio("https://seedname101.github.io/flappy/sfx_point.wav");
       var death = new Audio("https://seedname101.github.io/flappy/sfx_die.wav");
       var flap = new Audio("https://seedname101.github.io/flappy/sfx_wing.wav");
-      b = loadImage("https://seedname101.github.io/flappy/flappy.jpg");
 
     
 /**
@@ -65,8 +63,9 @@ physics.prototype.update = function() {
     this.acceleration.mult(0);
 };
 physics.prototype.display = function(){
- noLoop();
-    image(b, this.position.x, this.positon.y, this.mass, this.mass);
+    fill(249, 166, 2);
+    strokeWeight(1);
+    ellipse(this.position.x, this.position.y, this.mass, this.mass);
 };
 physics.prototype.edges = function(){
     if (this.position.y > height-this.mass/2 && scene === 1) {
