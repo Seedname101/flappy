@@ -4,7 +4,7 @@
     <title>Flappy Circle</title> 
 </head>
  <body>
- <h1 align = "center"></h1>
+ <h1 align = "center" id = "t">Flappy Circle</h1>
     <p align="center"> 
       <canvas id="mycanvas"></canvas> 
     </p>
@@ -216,6 +216,7 @@ if(scene === 2 && mouseX >= width/2-150/2 && mouseX <= width/2-150/2+150 && mous
     }
 };
 keyPressed = function(){
+document.getElementById("t").innerHTML = "TEST";
 if(keyCode === UP){
         if(scene === 0){
         scene += 1;
