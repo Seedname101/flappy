@@ -32,7 +32,7 @@
  Special thanks to: Larry Serflaten
  
  HIGH SCORES:
- 1. Julian - 37
+ 1. Julian - 40
  2.[name] - [score]
  3.[name] - [score]
  4.[name] - [score]
@@ -84,7 +84,7 @@ physics.prototype.edges = function(){
 };
 physics.prototype.idle = function(){
 if(timer >= 3){
-    this.velocity.set(0, -5.15);
+    this.velocity.set(0, -5.185);
     timer = 0;
 }
 };
@@ -216,7 +216,6 @@ if(scene === 2 && mouseX >= width/2-150/2 && mouseX <= width/2-150/2+150 && mous
     }
 };
 keyPressed = function(){
-document.getElementById("t").innerHTML = "TEST";
 if(keyCode === UP){
         if(scene === 0){
         scene += 1;
