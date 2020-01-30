@@ -168,8 +168,14 @@ if(sx <= width/3-80 && sx >= width/3-80){
      death.play();
     }}
     if(scene === 2){
-    
      var hs = Math.max.apply(null, hiscore);
+    var targetProxy = new Proxy(hs, {
+  set: function (target, key, value) {
+      console.log(`${key} set to ${value}`);
+      target[key] = value;
+      return true;
+  }
+});
         timer = 0;
     background(135, 206, 235);
     fill(255, 0, 0);
