@@ -168,13 +168,7 @@ if(sx <= width/3-80 && sx >= width/3-80){
      death.play();
     }}
     if(scene === 2){
-    var targetProxy = new Proxy(Math.max.apply(null, hiscore), {
-  set: function (target, key, value) {
-      console.log(`${key} set to ${value}`);
-      target[key] = value;
-      return true;
-  }
-});
+var hs = Math.max.apply(null, hiscore);
         timer = 0;
     background(135, 206, 235);
     fill(255, 0, 0);
@@ -183,7 +177,7 @@ if(sx <= width/3-80 && sx >= width/3-80){
     textFont(createFont("impact"), 40);
     fill(0, 0, 0);
     text("Score: " + score, width/2, height/2);
-    text("High Score: " + Math.max.apply(null, hiscore), width/2, height/2-50);
+    text("High Score: " + hs, width/2, height/2-50);
     fill(255, 255, 255);
     rect(width/2-150/2, height/2-50/2+75, 150, 50);
     textFont(createFont("comic sans ms"), 30);
