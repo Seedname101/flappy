@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html> 
  <head>
-    <title>Flappy Circle</title> 
+    <title>Flappy Circle</title>
 </head>
+ <style>
+ </style>
  <body>
  <h1 align = "center" id = "t">Flappy Circle</h1>
     <p align="center"> 
@@ -166,6 +168,8 @@ if(sx <= width/3-80 && sx >= width/3-80){
      death.play();
     }}
     if(scene === 2){
+    
+     var hs = Math.max.apply(null, hiscore);
         timer = 0;
     background(135, 206, 235);
     fill(255, 0, 0);
@@ -174,7 +178,7 @@ if(sx <= width/3-80 && sx >= width/3-80){
     textFont(createFont("impact"), 40);
     fill(0, 0, 0);
     text("Score: " + score, width/2, height/2);
-    text("High Score: " + Math.max.apply(null, hiscore), width/2, height/2-50);
+    text("High Score: " + hs, width/2, height/2-50);
     fill(255, 255, 255);
     rect(width/2-150/2, height/2-50/2+75, 150, 50);
     textFont(createFont("comic sans ms"), 30);
@@ -231,6 +235,7 @@ if(keyCode === UP){
     score = 0;
     sx = width;
     syh = 100;
+     timer = 0;
 }
     if(scene === 3 && pauseh === 1){
         pauseh = 0;
