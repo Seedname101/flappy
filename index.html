@@ -169,6 +169,23 @@ if(sx <= width/3-80 && sx >= width/3-80){
     }}
     if(scene === 2){
 var hs = Math.max.apply(null, hiscore);
+    hs = {
+  aInternal: 10,
+  aListener: function(val) {},
+  set a(val) {
+    this.aInternal = val;
+    this.aListener(val);
+  },
+  get a() {
+    return this.aInternal;
+  },
+  registerListener: function(listener) {
+    this.aListener = listener;
+  }
+};
+x.registerListener(function(val)) {
+  document.getElementById("t").innerHTML = "Someone changed the value of x.a";
+});
         timer = 0;
     background(135, 206, 235);
     fill(255, 0, 0);
